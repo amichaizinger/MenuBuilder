@@ -1,0 +1,62 @@
+# Ignore build results
+bin/
+obj/
+out/
+*.log
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore Visual Studio Code settings
+.vscode/
+*.code-workspace
+
+# Ignore build artifacts and debug files
+*.dll
+*.exe
+*.pdb
+*.cache
+*.db
+*.db-shm
+*.db-wal
+*.vs/
+.vs/
+bin/
+obj/
+*.user
+*.suo
+
+
+
+# Ignore packages
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+
+# Ignore publish and build folders
+publish/
+App_Data/
+node_modules/
+dist/
+
+# Ignore Rider/JetBrains IDE files
+.idea/
+
+# Ignore NuGet config
+*.nuget.props
+*.nuget.targets
+
+# Ignore ReSharper files
+_ReSharper*/
+*.DotSettings.user
+
+# Ignore temporary files
+~$*
+*.tmp
+
+# Prevent Git from seeing folders outside this project
+../
