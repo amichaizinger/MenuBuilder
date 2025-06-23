@@ -2,8 +2,26 @@
 using MenuBuilder;
 
 Console.WriteLine("welcome to MenuBuilder");
+Console.WriteLine("do you want the user to chose by the number or by the name of the option. enter name or number");
+string inputMethod = Console.ReadLine()?.ToLower();
 
-IMenu mainMenu = new MainMenu();
+IMenuInputHandler inputHandler;
+
+switch(inputMethod)
+{
+    case "number":
+        inputHandler = new NumberInputHandler();
+        break;
+    case "name":
+        inputHandler = new NameInputHandler();
+        break;
+    default:
+        Console.WriteLine("Invalid input method. Defaulting to number input.");
+        inputHandler = new NumberInputHandler();
+        break;
+}
+
+IMenu mainMenu = new MainMenu(inputHandler);
 
 
 mainMenu.Commands.Add("option1", new DefaultCommand());

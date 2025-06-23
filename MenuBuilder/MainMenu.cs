@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,17 +11,19 @@ namespace MenuBuilder
     public class MainMenu : IMenu
     {
         public Dictionary<string, IMenuCommand> Commands { get; set; }
+        private readonly IMenuInputHandler _menuInputHandler;
 
-        public MainMenu()
+        public MainMenu(IMenuInputHandler menuInputHandler)
         {
             Commands = new Dictionary<string, IMenuCommand>();
+            _menuInputHandler = menuInputHandler ?? throw new ArgumentNullException(nameof(menuInputHandler));
+
         }
 
 
 
         public void showMenu()
         {
-            var commandList = new List<string>(Commands.Keys);
             bool showMenu = true;
 
             while (showMenu)
@@ -28,36 +31,37 @@ namespace MenuBuilder
                 int currentOption = 1;
 
                 Console.WriteLine("Choose an option:");
-                foreach(var command in Commands)
+                foreach (var command in Commands)
                 {
                     Console.WriteLine($"{currentOption}) {command.Key}");
                     currentOption++;
                 }
                 Console.WriteLine($"{currentOption}) Exit");
-                Console.WriteLine("Select an option: ");
 
-                string choice = Console.ReadLine();
+                string selectedCommand = _menuInputHandler.getCommandKey(Commands);
 
-                if(int.TryParse(choice, out int option) && option >0 && option <= Commands.Count+1)
+                if (selectedCommand == null)
                 {
-                    if (option == currentOption)
-                    {
-                        showMenu = false;
-                        continue;
-                    }
-
-                    string selectedCommand = commandList[option - 1];
-                    IMenuCommand menuCommand = Commands[selectedCommand];
-                    menuCommand.Execute();
+                    Console.WriteLine("Invalid selection. Please try again.");
+                    continue;
+                }
+                else if (selectedCommand == "Exit")
+                {
+                    showMenu = false;
+                    continue;
+                }
+                else if (Commands.TryGetValue(selectedCommand, out IMenuCommand commandToExecute))
+                {
+                    commandToExecute.Execute();
                 }
                 else
                 {
-                    Console.WriteLine("Invalid option. try again.");
-                    continue;
+                    Console.WriteLine("Command not found. Please try again.");
                 }
-
-               
             }
+
+
+
         }
     }
 }
