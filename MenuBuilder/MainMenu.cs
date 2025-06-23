@@ -58,6 +58,7 @@ namespace MenuBuilder
                 {
                     Console.WriteLine("Command not found. Please try again.");
                 }
+                Console.WriteLine();
             }
 
 

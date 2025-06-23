@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Windows.Input;
 using MenuBuilder;
 
 Console.WriteLine("welcome to MenuBuilder");
@@ -24,7 +25,7 @@ switch(inputMethod)
 IMenu mainMenu = new MainMenu(inputHandler);
 
 
-mainMenu.Commands.Add("option1", new DefaultCommand());
+mainMenu.Commands.Add("option1", new PrintCommand("Hello from Main!"));
 mainMenu.Commands.Add("option2", new DefaultCommand());
 mainMenu.Commands.Add("option3", new DefaultCommand());
 
