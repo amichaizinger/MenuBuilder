@@ -8,7 +8,7 @@ namespace MenuBuilder
 {
     public class PrintCommand : IMenuCommand
     {
-        private readonly string _message;
+        private readonly string _message; 
         public PrintCommand(string message)
         {
             _message = message;

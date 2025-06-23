@@ -25,9 +25,9 @@ switch(inputMethod)
 IMenu mainMenu = new MainMenu(inputHandler);
 
 
-mainMenu.Commands.Add("option1", new PrintCommand("Hello from Main!"));
-mainMenu.Commands.Add("option2", new DefaultCommand());
-mainMenu.Commands.Add("option3", new DefaultCommand());
+mainMenu.Commands.Add("print the apps default message", new PrintCommand("Hello from Main!"));
+mainMenu.Commands.Add("print whatever you want", new InputPrintCommand());
+mainMenu.Commands.Add("use our default command", new DefaultCommand());
 
 
 mainMenu.showMenu();
