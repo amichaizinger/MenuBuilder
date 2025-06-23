@@ -5,20 +5,11 @@ Console.WriteLine("welcome to MenuBuilder");
 
 IMenu mainMenu = new MainMenu();
 
-while (true)
-{
-    Console.WriteLine("enter an option for the menu or finish by sending 0");
-    string input = Console.ReadLine();
 
-    if (input == "0")
-    {
-        break;
-    }
+mainMenu.Commands.Add("option1", new DefaultCommand());
+mainMenu.Commands.Add("option2", new DefaultCommand());
+mainMenu.Commands.Add("option3", new DefaultCommand());
 
-    IMenuCommand menuCommand = new DefaultCommand();
-
-    mainMenu.Commands.Add(input, menuCommand);
-}
 
 mainMenu.showMenu();
 
