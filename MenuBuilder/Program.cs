@@ -1,7 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using MenuBuilder;
 
-int currentOption = 1;
 Console.WriteLine("welcome to MenuBuilder");
 
 IMenu mainMenu = new MainMenu();
@@ -18,8 +17,7 @@ while (true)
 
     IMenuCommand menuCommand = new DefaultCommand();
 
-    mainMenu.Commands.Add($"{currentOption}) {input}", menuCommand);
-    currentOption++;
+    mainMenu.Commands.Add(input, menuCommand);
 }
 
 mainMenu.showMenu();

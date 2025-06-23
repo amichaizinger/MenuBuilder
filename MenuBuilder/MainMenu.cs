@@ -18,31 +18,40 @@ namespace MenuBuilder
         public void showMenu()
         {
             bool showMenu = true;
+            int currentOption = 1;
 
             while (showMenu)
             {
                 Console.Clear();
                 Console.WriteLine("Choose an option:");
-                Console.WriteLine("1)");
-                Console.WriteLine("2)");
-                Console.WriteLine("3) Exit");
+                foreach(var command in Commands)
+                {
+                    Console.WriteLine($"{currentOption}) {command.Key}");
+                    currentOption++;
+                }
+                Console.WriteLine($"{currentOption}) Exit");
                 Console.WriteLine("Select an option: ");
 
                 string choice = Console.ReadLine();
 
-                switch (choice)
+                if(int.TryParse(choice, out int option) && option >0 && option <= Commands.Count)
                 {
-                    case "1":
-                        break;
-                    case "2":
-                        break;
-                    case "3":
+                    if (option == currentOption)
+                    {
                         showMenu = false;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid option, please try again.");
-                        break;
+                        continue;
+                    }
+
+                    IMenuCommand menuCommand = Commands[choice];
+                    menuCommand.Execute();
                 }
+                else
+                {
+                    Console.WriteLine("Invalid option. Please try again.");
+                    continue;
+                }
+
+               
             }
         }
     }
